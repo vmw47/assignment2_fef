@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Cat Nap</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Josefin Sans", sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: linear-gradient(to bottom, #ffcc88, #443355);
+            transition: background 1s ease;
+        }
+        .container {
+            height: 500vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 100px;
+
+        }
+        .cat {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            transition: opacity 1s ease;
+        }
+        h1{
+            font-family: "Caprasimo", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        @keyframes blink {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes slow-blink {
+            0%, 100% { transform: scale(1); }
+            50% { opacity: 0.8; }
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .message {
+            position: absolute;
+            bottom: 50px;
+            font-size: 24px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .sleeping {
+    animation: breathe 3s infinite alternate ease-in-out;
+}
+.zzz {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    color: white;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scroll to help the cat sleep... 😸💤</h1>
+        <p>Keep scrolling to make the cat fall asleep peacefully!</p>
+        <!-- The cat starts in the "awake" state -->
+        <img id="cat" class="cat" src="picture/pirWf4l.png" alt="Animated Cat">
+        <p class="message" id="message">Goodnight... 🌙</p>
+        <div class="zzz" id="zzz">💤💤💤</div>
+
+    </div>
+
+    <script>
+        window.onload = function() {
+            window.scrollTo(0,0);
+            window.addEventListener("scroll", () => {
+                let scrollPosition = window.scrollY;
+            let maxScroll = document.body.scrollHeight - window.innerHeight;
+            let cat = document.getElementById("cat");
+            let message = document.getElementById("message");
+            let sleepiness = scrollPosition / maxScroll;
+            let zzz = document.getElementById("zzz");
+            let snoreAudio = document.getElementById("snore");
+
+            
+
+            document.body.style.background = `linear-gradient(to bottom, #ffcc88 ${100 - sleepiness * 100}%, #221133)`;
+
+            
+            // Change the cat's image source dynamically based on scroll position
+            if (sleepiness > 0.6) {
+                cat.src = "https://i.imgur.com/8Rlv2oi.png"; // Asleep cat
+                message.style.opacity = "1";
+                cat.classList.add("sleeping");
+
+                zzz.style.opacity = "1";
+                snoreAudio.play();
+
+
+            } else if (sleepiness > 0.3) {
+                cat.src = "https://i.imgur.com/f5X2xFg.png"; // Sleepy cat
+                zzz.style.opacity = "0"; 
+            } else {
+                cat.src = "https://i.imgur.com/pirWf4l.png"; // Awake cat
+                message.style.opacity = "0";
+                zzz.style.opacity = "0";
+                snoreAudio.pause();
+                snoreAudio.currentTime = 0;
+                cat.classList.remove("sleeping");
+
+            }
+        });
+    }
+    </script>
+    <audio id="snore" loop>
+        <source src="snore.mp3" type="audio/mpeg">
+    </audio>
+</body>
+</html>
