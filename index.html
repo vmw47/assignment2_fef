@@ -28,13 +28,13 @@
         }
         .cat {
             position: fixed;
-            bottom: 80px; /* Back to original position */
+            bottom: 80px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 300px; /* Increased size */
+            width: 300px;
             transition: opacity 1s ease;
             opacity: 1;
-            z-index: 2; /* Ensures cat is always visible */
+            z-index: 2; 
         }
 
 
@@ -116,7 +116,7 @@
             text-align: center;
             opacity: 0;
             transition: opacity 1s ease;
-            z-index: 3; /* Ensure it appears on top of other elements */
+            z-index: 3; 
 }
         
     </style>
@@ -141,24 +141,24 @@
 
     let moon = document.createElement("div");
     moon.classList.add("moon");
-    moon.style.opacity = "0"; // Initially hidden
+    moon.style.opacity = "0"; 
     document.body.appendChild(moon);
 
     let stars = document.createElement("div");
     stars.classList.add("stars");
     document.body.appendChild(stars);
 
-    // Create "Good Job!" message element
+    // good job message
     let goodJobMessage = document.createElement("div");
     goodJobMessage.classList.add("good-job-message");
-    goodJobMessage.style.opacity = "0"; // Initially hidden
+    goodJobMessage.style.opacity = "0"; 
     goodJobMessage.innerHTML = "Good Job! You helped the cat fall asleep.";
     document.body.appendChild(goodJobMessage);
 
     window.addEventListener("scroll", () => {
         let scrollPosition = window.scrollY;
         let maxScroll = document.body.scrollHeight - window.innerHeight;
-        let progress = scrollPosition / maxScroll; // 0 to 1 scale
+        let progress = scrollPosition / maxScroll;
         let cat = document.getElementById("cat");
         let message = document.getElementById("message");
         let zzz = document.getElementById("zzz");
@@ -174,22 +174,22 @@
             ? `☀️ ${formattedHours}:00 ${suffix}` 
             : `🌙 ${formattedHours}:00 ${suffix}`; 
 
-        // 🌅 Keep background bright until 6 PM, then gradually darken
+        // Keep background bright until 6 PM, then gradually darken
         let darkness = 0;
         if (hours >= 18) {
-            darkness = (hours - 18) / 3; // Darkens from 6 PM to 9 PM
+            darkness = (hours - 18) / 3; 
         }
 
         document.body.style.background = `linear-gradient(to bottom, #ffcc88 ${100 - (darkness * 100)}%, #221133)`;
 
-        // 🐱 Sleep transition at 7 PM
+        // sleep transition at 7 PM
         if (hours >= 19) { 
             cat.src = "picture/sleeping_cat_processed.webp"; 
             message.style.opacity = "1";
             cat.classList.remove("tail-wag");
             sun.style.opacity = "0";
-            moon.style.opacity = "1"; // 🌙 Moon appears
-            stars.style.opacity = "1"; // Stars appear
+            moon.style.opacity = "1"; 
+            stars.style.opacity = "1"; 
         } else if (hours >= 18) { 
             cat.src = "picture/77b91b45730511bc6bf8d43b15e58902_t (1)_processed.jpeg"; 
             message.style.opacity = "0";
@@ -203,15 +203,15 @@
             message.style.opacity = "0";
             cat.classList.add("tail-wag");
             sun.style.opacity = "1"; 
-            moon.style.opacity = "0"; // Moon hidden
-            stars.style.opacity = "0"; // Stars hidden
+            moon.style.opacity = "0"; 
+            stars.style.opacity = "0"; 
         }
 
-        // Show "Good Job!" message when scrolled to the bottom
+        // show good job message at the bottom
         if (progress === 1) {
-            goodJobMessage.style.opacity = "1"; // Display message
+            goodJobMessage.style.opacity = "1"; 
         } else {
-            goodJobMessage.style.opacity = "0"; // Hide message when not at the bottom
+            goodJobMessage.style.opacity = "0"; 
         }
     });
 };
