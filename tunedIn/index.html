@@ -8,9 +8,16 @@
   <style>
     * { box-sizing: border-box; font-family: "Quicksand", sans-serif; }
     body { margin: 0; padding: 0; height: 100vh; overflow: hidden; position: relative; }
-    .animated-gradient { position: fixed; top: 0; left: 0; z-index: -10; width: 100%; height: 100%;
+    .animated-gradient {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: -10;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(270deg, #c58fe0, #84ca98, #a5bfe9, #deaee9, #64dcff, #e16565, #d5d594);
-      background-size: 1400% 1400%; animation: gradientShift 30s ease infinite; }
+      background-size: 1400% 1400%;
+      animation: gradientShift 30s ease infinite;
+    }
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       25% { background-position: 50% 100%; }
@@ -18,27 +25,101 @@
       75% { background-position: 50% 0%; }
       100% { background-position: 0% 50%; }
     }
-    .menu-toggle { position: absolute; top: 20px; left: 20px; font-size: 2em; color: #fff; background: none; border: none; cursor: pointer; z-index: 10; }
+    .menu-toggle {
+      position: absolute; top: 20px; left: 20px;
+      font-size: 2em; color: #fff;
+      background: none; border: none;
+      cursor: pointer; z-index: 10;
+    }
     .menu-toggle.hidden { display: none; }
-    .menu { background-color: rgba(130, 180, 212, 0.2); backdrop-filter: blur(8px); width: 250px; height: 100%; padding: 20px; color: white; display: none; flex-direction: column; justify-content: flex-start; position: absolute; top: 0; left: 0; z-index: 15; border-right: 1px solid white; }
+    .menu {
+      background-color: rgba(130, 180, 212, 0.2);
+      backdrop-filter: blur(8px);
+      width: 250px; height: 100%;
+      padding: 20px; color: white;
+      display: none; flex-direction: column;
+      justify-content: flex-start;
+      position: absolute; top: 0; left: 0;
+      z-index: 15;
+      border-right: 1px solid white;
+    }
     .menu.show { display: flex; }
-    .sound-option { display: flex; align-items: center; gap: 10px; margin: 10px 0; cursor: pointer; }
-    .sound-option button { background: none; border: none; font-size: 1.2em; color: white; cursor: pointer; }
-    .container { display: flex; flex-direction: column; align-items: center; text-align: center; color: white; width: 100%; height: 100vh; padding: 40px 20px; position: relative; z-index: 1; }
+    .sound-option {
+      display: flex; align-items: center;
+      gap: 10px; margin: 10px 0;
+      cursor: pointer;
+    }
+    .sound-option button {
+      background: none; border: none;
+      font-size: 1.2em; color: white;
+      cursor: pointer;
+    }
+    .container {
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      color: white; width: 100%;
+      height: 100vh; padding: 40px 20px;
+      position: relative; z-index: 1;
+    }
     .title { font-size: 2.5em; font-weight: bold; margin-bottom: 10px; }
     .subtitle { font-size: 1.2em; margin-bottom: 40px; }
-    .mood-box-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; padding-bottom: 40px; }
-    .mood-box { background-color: rgba(255, 255, 255, 0.1); border: 1px solid white; border-radius: 20px; padding: 40px; max-width: 600px; width: 100%; min-height: 200px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
-    .mood-nav-row { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
-    .mood-options { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .mood-options button { padding: 10px 20px; border: none; background-color: #ffffff; color: #333; border-radius: 20px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; }
+    .mood-box-wrapper {
+      flex: 1; display: flex;
+      align-items: center; justify-content: center;
+      width: 100%; padding-bottom: 40px;
+    }
+    .mood-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid white; border-radius: 20px;
+      padding: 40px; max-width: 600px;
+      width: 100%; min-height: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    .mood-nav-row {
+      display: flex; align-items: center;
+      justify-content: center; gap: 10px;
+      width: 100%;
+    }
+    .mood-options {
+      display: flex; gap: 10px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .mood-options button {
+      padding: 10px 20px; border: none;
+      background-color: #ffffff; color: #333;
+      border-radius: 20px; font-size: 1em;
+      cursor: pointer; transition: all 0.3s ease;
+    }
     .mood-options button:hover { background-color: #e1e4e7; }
-    .nav-arrows button { background: none; border: none; font-size: 1em; color: #fff; cursor: pointer; }
+    .nav-arrows button {
+      background: none; border: none;
+      font-size: 1em; color: #fff;
+      cursor: pointer;
+    }
+
+    #pauseBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 100;
+    }
   </style>
 </head>
 <body onclick="closeMenu(event)">
   <div class="animated-gradient"></div>
+
   <button class="menu-toggle" id="menuToggle" onclick="toggleMenu(event)">&#9776;</button>
+
   <div class="menu" id="sidebarMenu">
     <div>
       <h3>Add ons</h3>
@@ -47,6 +128,7 @@
       <div class="sound-option"><button id="windBtn" onclick="toggleSound('wind')">▶</button> Wind 🌬️</div>
     </div>
   </div>
+
   <div class="container">
     <div class="title">TunedIn</div>
     <div class="subtitle">Tune in to yourself</div>
@@ -61,15 +143,19 @@
       </div>
     </div>
   </div>
+
+  <button id="pauseBtn" onclick="togglePauseMood()">⏸ Pause</button>
+
   <audio id="moodAudio"></audio>
   <audio id="rainSound" loop><source src="Rain Heavy Loud.mp3" type="audio/mpeg" /></audio>
   <audio id="thunderSound" loop><source src="Thunderstorm - Long.mp3" type="audio/mpeg" /></audio>
   <audio id="windSound" loop><source src="Wind Quiet Creaks.mp3" type="audio/mpeg" /></audio>
+
   <script>
     const moods = ["Energetic", "Calm", "Sad", "Tired", "Hopeful"];
     const displayCount = 4;
     let currentIndex = 0;
-    let progressInterval;
+    let isPaused = false;
 
     const moodSongs = {
       Energetic: { title: "Energetic mix", duration: 210, src: "I Had a Feeling - TrackTribe.mp3" },
@@ -91,11 +177,26 @@
     }
 
     function playMoodSong(mood) {
-      clearInterval(progressInterval);
       const song = moodSongs[mood];
       const audio = document.getElementById("moodAudio");
       audio.src = song.src;
       audio.play();
+      document.getElementById("pauseBtn").textContent = "⏸ Pause";
+      isPaused = false;
+    }
+
+    function togglePauseMood() {
+      const moodAudio = document.getElementById("moodAudio");
+      const btn = document.getElementById("pauseBtn");
+      if (moodAudio.paused) {
+        moodAudio.play();
+        btn.textContent = "⏸ Pause";
+        isPaused = false;
+      } else {
+        moodAudio.pause();
+        btn.textContent = "▶ Play";
+        isPaused = true;
+      }
     }
 
     function toggleMenu(event) {
@@ -129,6 +230,20 @@
         audio.pause();
         audio.currentTime = 0;
         button.textContent = "▶";
+      }
+    }
+
+    function nextMood() {
+      if (currentIndex + displayCount < moods.length) {
+        currentIndex++;
+        renderMoods();
+      }
+    }
+
+    function prevMood() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderMoods();
       }
     }
 
